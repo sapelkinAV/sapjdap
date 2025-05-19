@@ -1,28 +1,25 @@
 package client
 
 import (
-	"context"
 	"fmt"
 	"sync"
 )
 
-type JdwpContext struct {
-	ctx                           context.Context
+type JdwpReplies struct {
 	ReplyPacketReceiverMap        map[uint32]chan *ReplyPacket
 	ReplyCommandPacketReceiverMap map[uint32]chan *CommandPacket
 	muReply                       sync.Mutex
 	muCommand                     sync.Mutex
 }
 
-func NewJdwpContext() *JdwpContext {
-	return &JdwpContext{
-		ctx:                           context.Background(),
+func NewJdwpReplies() *JdwpReplies {
+	return &JdwpReplies{
 		ReplyPacketReceiverMap:        make(map[uint32]chan *ReplyPacket),
 		ReplyCommandPacketReceiverMap: make(map[uint32]chan *CommandPacket),
 	}
 }
 
-func (jc *JdwpContext) AddReceiverChannel(messageId uint32) chan *ReplyPacket {
+func (jc *JdwpReplies) AddReceiverChannel(messageId uint32) chan *ReplyPacket {
 	jc.muReply.Lock()
 	defer jc.muReply.Unlock()
 
@@ -30,7 +27,7 @@ func (jc *JdwpContext) AddReceiverChannel(messageId uint32) chan *ReplyPacket {
 	return jc.ReplyPacketReceiverMap[messageId]
 }
 
-func (jc *JdwpContext) GetReceiverChannel(messageId uint32) (chan *ReplyPacket, error) {
+func (jc *JdwpReplies) GetReceiverChannel(messageId uint32) (chan *ReplyPacket, error) {
 	jc.muReply.Lock()
 	defer jc.muReply.Unlock()
 
@@ -44,7 +41,7 @@ func (jc *JdwpContext) GetReceiverChannel(messageId uint32) (chan *ReplyPacket, 
 	return jc.ReplyPacketReceiverMap[messageId], nil
 }
 
-func (jc *JdwpContext) PopReceiverChannel(messageId uint32) {
+func (jc *JdwpReplies) PopReceiverChannel(messageId uint32) {
 	jc.muReply.Lock()
 	defer jc.muReply.Unlock()
 

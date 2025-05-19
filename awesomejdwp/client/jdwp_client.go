@@ -4,22 +4,25 @@ import (
 	"context"
 	"fmt"
 	"net"
+	"sapelkinav/javadap/utils"
 )
+
+var log, _ = utils.GetComponentLogger("jdwp", "client")
 
 type JdwpClient struct {
 	addr          string
 	ctx           context.Context
 	conn          net.Conn
 	pktID         uint32
-	ObjectIdSizes ObjectIdSizes
-	JdwpContext   *JdwpContext
+	objectIdSizes *ObjectIdSizes
+	jdwpReplies   *JdwpReplies
 }
 
-func NewJdwpClient(addr string) *JdwpClient {
+func NewJdwpClient(addr string, ctx context.Context) *JdwpClient {
 	jc := &JdwpClient{
 		addr:        addr,
-		ctx:         context.Background(),
-		JdwpContext: NewJdwpContext(),
+		ctx:         ctx,
+		jdwpReplies: NewJdwpReplies(),
 	}
 	return jc
 }
@@ -36,13 +39,15 @@ func (jc *JdwpClient) SendCommand(
 
 	_, err := jc.conn.Write(pkt.PrepareByteBuffer().Bytes())
 	if err != nil {
-		return nil, fmt.Errorf("failed to send command: %w", err)
+		return nil, utils.LogError(log, err, "failed to send command")
 	}
-	recieverChan := jc.JdwpContext.AddReceiverChannel(pkt.ID)
+	receiverChan := jc.jdwpReplies.AddReceiverChannel(pkt.ID)
 
-	return recieverChan, nil
+	return receiverChan, nil
 }
 
-func (jc *JdwpClient) addReceiverChannel(messageId uint32) {
+func (jc *JdwpClient) HelloWorld() {
+
+	fmt.Println("Hello World")
 
 }

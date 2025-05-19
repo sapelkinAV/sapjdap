@@ -3,30 +3,39 @@ package client
 import (
 	"encoding/binary"
 	"fmt"
+	"sapelkinav/javadap/utils"
 )
 
 const REPLY_HEADER_LENGTH = 11
 const REPLY_FLAG = 0x80
 
-func (jc *JdwpClient) receiveLoop() {
+func (jc *JdwpClient) initializeReceiveLoop() {
 	go func() {
 		for {
-			reply, _, err := jc.readMessage()
-			if err != nil {
-				fmt.Println("Error occured during reading message, ", err)
-				continue
-			}
-
-			go func() {
-				ch, err := jc.JdwpContext.GetReceiverChannel(reply.ID)
+			select {
+			case <-jc.ctx.Done():
+				return
+			default:
+				reply, _, err := jc.readMessage()
 				if err != nil {
-					ch <- reply
-					close(ch)
-					jc.JdwpContext.PopReceiverChannel(reply.ID)
+					utils.LogError(log, err, "Error occured during reading message, ")
+					continue
 				}
-			}()
+				go prepareReplyChannel(jc, reply)
+			}
 		}
 	}()
+}
+
+func prepareReplyChannel(jc *JdwpClient, reply *ReplyPacket) {
+	ch, err := jc.jdwpReplies.GetReceiverChannel(reply.ID)
+	if err != nil {
+		close(ch)
+		utils.LogError(log, err, "Error during preparing channel to recieve message")
+		jc.jdwpReplies.PopReceiverChannel(reply.ID)
+	}
+	ch <- reply
+	jc.jdwpReplies.PopReceiverChannel(reply.ID)
 }
 
 func (jc *JdwpClient) readMessage() (*ReplyPacket, *CommandPacket, error) {

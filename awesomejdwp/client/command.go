@@ -2,283 +2,283 @@ package client
 
 import "fmt"
 
-// CmdSet is the namespace for a command identifier.
-type CmdSet uint8
+// cmdSet is the namespace for a command identifier.
+type cmdSet uint8
 
-// CmdId is a command in a command Set.
-type CmdId uint8
+// cmdId is a command in a command Set.
+type cmdId uint8
 
 type Command struct {
-	Set CmdSet
-	Id  CmdId
+	Set cmdSet
+	Id  cmdId
 }
 
 func (c Command) String() string {
-	return fmt.Sprintf("%v.%v", c.Set, CmdNames[c])
+	return fmt.Sprintf("%v.%v", c.Set, cmdNames[c])
 }
 
 const (
-	CmdSetVirtualMachine       = CmdSet(1)
-	CmdSetReferenceType        = CmdSet(2)
-	CmdSetClassType            = CmdSet(3)
-	CmdSetArrayType            = CmdSet(4)
-	CmdSetInterfaceType        = CmdSet(5)
-	CmdSetMethod               = CmdSet(6)
-	CmdSetField                = CmdSet(8)
-	CmdSetObjectReference      = CmdSet(9)
-	CmdSetStringReference      = CmdSet(10)
-	CmdSetThreadReference      = CmdSet(11)
-	CmdSetThreadGroupReference = CmdSet(12)
-	CmdSetArrayReference       = CmdSet(13)
-	CmdSetClassLoaderReference = CmdSet(14)
-	CmdSetEventRequest         = CmdSet(15)
-	CmdSetStackFrame           = CmdSet(16)
-	CmdSetClassObjectReference = CmdSet(17)
-	CmdSetEvent                = CmdSet(64)
+	cmdSetVirtualMachine       = cmdSet(1)
+	cmdSetReferenceType        = cmdSet(2)
+	cmdSetClassType            = cmdSet(3)
+	cmdSetArrayType            = cmdSet(4)
+	cmdSetInterfaceType        = cmdSet(5)
+	cmdSetMethod               = cmdSet(6)
+	cmdSetField                = cmdSet(8)
+	cmdSetObjectReference      = cmdSet(9)
+	cmdSetStringReference      = cmdSet(10)
+	cmdSetThreadReference      = cmdSet(11)
+	cmdSetThreadGroupReference = cmdSet(12)
+	cmdSetArrayReference       = cmdSet(13)
+	cmdSetClassLoaderReference = cmdSet(14)
+	cmdSetEventRequest         = cmdSet(15)
+	cmdSetStackFrame           = cmdSet(16)
+	cmdSetClassObjectReference = cmdSet(17)
+	cmdSetEvent                = cmdSet(64)
 )
 
-func (c CmdSet) String() string {
+func (c cmdSet) String() string {
 	switch c {
-	case CmdSetVirtualMachine:
+	case cmdSetVirtualMachine:
 		return "VirtualMachine"
-	case CmdSetReferenceType:
+	case cmdSetReferenceType:
 		return "ReferenceType"
-	case CmdSetClassType:
+	case cmdSetClassType:
 		return "ClassType"
-	case CmdSetArrayType:
+	case cmdSetArrayType:
 		return "ArrayType"
-	case CmdSetInterfaceType:
+	case cmdSetInterfaceType:
 		return "InterfaceType"
-	case CmdSetMethod:
+	case cmdSetMethod:
 		return "Method"
-	case CmdSetField:
+	case cmdSetField:
 		return "Field"
-	case CmdSetObjectReference:
+	case cmdSetObjectReference:
 		return "ObjectReference"
-	case CmdSetStringReference:
+	case cmdSetStringReference:
 		return "StringReference"
-	case CmdSetThreadReference:
+	case cmdSetThreadReference:
 		return "ThreadReference"
-	case CmdSetThreadGroupReference:
+	case cmdSetThreadGroupReference:
 		return "ThreadGroupReference"
-	case CmdSetArrayReference:
+	case cmdSetArrayReference:
 		return "ArrayReference"
-	case CmdSetClassLoaderReference:
+	case cmdSetClassLoaderReference:
 		return "ClassLoaderReference"
-	case CmdSetEventRequest:
+	case cmdSetEventRequest:
 		return "EventRequest"
-	case CmdSetStackFrame:
+	case cmdSetStackFrame:
 		return "StackFrame"
-	case CmdSetClassObjectReference:
+	case cmdSetClassObjectReference:
 		return "ClassObjectReference"
-	case CmdSetEvent:
+	case cmdSetEvent:
 		return "Event"
 	}
 	return fmt.Sprint(int(c))
 }
 
 var (
-	CmdVirtualMachineVersion               = Command{CmdSetVirtualMachine, 1}
-	CmdVirtualMachineClassesBySignature    = Command{CmdSetVirtualMachine, 2}
-	CmdVirtualMachineAllClasses            = Command{CmdSetVirtualMachine, 3}
-	CmdVirtualMachineAllThreads            = Command{CmdSetVirtualMachine, 4}
-	CmdVirtualMachineTopLevelThreadGroups  = Command{CmdSetVirtualMachine, 5}
-	CmdVirtualMachineDispose               = Command{CmdSetVirtualMachine, 6}
-	CmdVirtualMachineIDSizes               = Command{CmdSetVirtualMachine, 7}
-	CmdVirtualMachineSuspend               = Command{CmdSetVirtualMachine, 8}
-	CmdVirtualMachineResume                = Command{CmdSetVirtualMachine, 9}
-	CmdVirtualMachineExit                  = Command{CmdSetVirtualMachine, 10}
-	CmdVirtualMachineCreateString          = Command{CmdSetVirtualMachine, 11}
-	CmdVirtualMachineCapabilities          = Command{CmdSetVirtualMachine, 12}
-	CmdVirtualMachineClassPaths            = Command{CmdSetVirtualMachine, 13}
-	CmdVirtualMachineDisposeObjects        = Command{CmdSetVirtualMachine, 14}
-	CmdVirtualMachineHoldEvents            = Command{CmdSetVirtualMachine, 15}
-	CmdVirtualMachineReleaseEvents         = Command{CmdSetVirtualMachine, 16}
-	CmdVirtualMachineCapabilitiesNew       = Command{CmdSetVirtualMachine, 17}
-	CmdVirtualMachineRedefineClasses       = Command{CmdSetVirtualMachine, 18}
-	CmdVirtualMachineSetDefaultStratum     = Command{CmdSetVirtualMachine, 19}
-	CmdVirtualMachineAllClassesWithGeneric = Command{CmdSetVirtualMachine, 20}
+	cmdVirtualMachineVersion               = Command{cmdSetVirtualMachine, 1}
+	cmdVirtualMachineClassesBySignature    = Command{cmdSetVirtualMachine, 2}
+	cmdVirtualMachineAllClasses            = Command{cmdSetVirtualMachine, 3}
+	cmdVirtualMachineAllThreads            = Command{cmdSetVirtualMachine, 4}
+	cmdVirtualMachineTopLevelThreadGroups  = Command{cmdSetVirtualMachine, 5}
+	cmdVirtualMachineDispose               = Command{cmdSetVirtualMachine, 6}
+	cmdVirtualMachineIDSizes               = Command{cmdSetVirtualMachine, 7}
+	cmdVirtualMachineSuspend               = Command{cmdSetVirtualMachine, 8}
+	cmdVirtualMachineResume                = Command{cmdSetVirtualMachine, 9}
+	cmdVirtualMachineExit                  = Command{cmdSetVirtualMachine, 10}
+	cmdVirtualMachineCreateString          = Command{cmdSetVirtualMachine, 11}
+	cmdVirtualMachineCapabilities          = Command{cmdSetVirtualMachine, 12}
+	cmdVirtualMachineClassPaths            = Command{cmdSetVirtualMachine, 13}
+	cmdVirtualMachineDisposeObjects        = Command{cmdSetVirtualMachine, 14}
+	cmdVirtualMachineHoldEvents            = Command{cmdSetVirtualMachine, 15}
+	cmdVirtualMachineReleaseEvents         = Command{cmdSetVirtualMachine, 16}
+	cmdVirtualMachineCapabilitiesNew       = Command{cmdSetVirtualMachine, 17}
+	cmdVirtualMachineRedefineClasses       = Command{cmdSetVirtualMachine, 18}
+	cmdVirtualMachineSetDefaultStratum     = Command{cmdSetVirtualMachine, 19}
+	cmdVirtualMachineAllClassesWithGeneric = Command{cmdSetVirtualMachine, 20}
 
-	CmdReferenceTypeSignature            = Command{CmdSetReferenceType, 1}
-	CmdReferenceTypeClassLoader          = Command{CmdSetReferenceType, 2}
-	CmdReferenceTypeModifiers            = Command{CmdSetReferenceType, 3}
-	CmdReferenceTypeFields               = Command{CmdSetReferenceType, 4}
-	CmdReferenceTypeMethods              = Command{CmdSetReferenceType, 5}
-	CmdReferenceTypeGetValues            = Command{CmdSetReferenceType, 6}
-	CmdReferenceTypeSourceFile           = Command{CmdSetReferenceType, 7}
-	CmdReferenceTypeNestedTypes          = Command{CmdSetReferenceType, 8}
-	CmdReferenceTypeStatus               = Command{CmdSetReferenceType, 9}
-	CmdReferenceTypeInterfaces           = Command{CmdSetReferenceType, 10}
-	CmdReferenceTypeClassObject          = Command{CmdSetReferenceType, 11}
-	CmdReferenceTypeSourceDebugExtension = Command{CmdSetReferenceType, 12}
-	CmdReferenceTypeSignatureWithGeneric = Command{CmdSetReferenceType, 13}
-	CmdReferenceTypeFieldsWithGeneric    = Command{CmdSetReferenceType, 14}
-	CmdReferenceTypeMethodsWithGeneric   = Command{CmdSetReferenceType, 15}
+	cmdReferenceTypeSignature            = Command{cmdSetReferenceType, 1}
+	cmdReferenceTypeClassLoader          = Command{cmdSetReferenceType, 2}
+	cmdReferenceTypeModifiers            = Command{cmdSetReferenceType, 3}
+	cmdReferenceTypeFields               = Command{cmdSetReferenceType, 4}
+	cmdReferenceTypeMethods              = Command{cmdSetReferenceType, 5}
+	cmdReferenceTypeGetValues            = Command{cmdSetReferenceType, 6}
+	cmdReferenceTypeSourceFile           = Command{cmdSetReferenceType, 7}
+	cmdReferenceTypeNestedTypes          = Command{cmdSetReferenceType, 8}
+	cmdReferenceTypeStatus               = Command{cmdSetReferenceType, 9}
+	cmdReferenceTypeInterfaces           = Command{cmdSetReferenceType, 10}
+	cmdReferenceTypeClassObject          = Command{cmdSetReferenceType, 11}
+	cmdReferenceTypeSourceDebugExtension = Command{cmdSetReferenceType, 12}
+	cmdReferenceTypeSignatureWithGeneric = Command{cmdSetReferenceType, 13}
+	cmdReferenceTypeFieldsWithGeneric    = Command{cmdSetReferenceType, 14}
+	cmdReferenceTypeMethodsWithGeneric   = Command{cmdSetReferenceType, 15}
 
-	CmdClassTypeSuperclass   = Command{CmdSetClassType, 1}
-	CmdClassTypeSetValues    = Command{CmdSetClassType, 2}
-	CmdClassTypeInvokeMethod = Command{CmdSetClassType, 3}
-	CmdClassTypeNewInstance  = Command{CmdSetClassType, 4}
+	cmdClassTypeSuperclass   = Command{cmdSetClassType, 1}
+	cmdClassTypeSetValues    = Command{cmdSetClassType, 2}
+	cmdClassTypeInvokeMethod = Command{cmdSetClassType, 3}
+	cmdClassTypeNewInstance  = Command{cmdSetClassType, 4}
 
-	CmdArrayTypeNewInstance = Command{CmdSetArrayType, 1}
+	cmdArrayTypeNewInstance = Command{cmdSetArrayType, 1}
 
-	CmdMethodTypeLineTable                = Command{CmdSetMethod, 1}
-	CmdMethodTypeVariableTable            = Command{CmdSetMethod, 2}
-	CmdMethodTypeBytecodes                = Command{CmdSetMethod, 3}
-	CmdMethodTypeIsObsolete               = Command{CmdSetMethod, 4}
-	CmdMethodTypeVariableTableWithGeneric = Command{CmdSetMethod, 5}
+	cmdMethodTypeLineTable                = Command{cmdSetMethod, 1}
+	cmdMethodTypeVariableTable            = Command{cmdSetMethod, 2}
+	cmdMethodTypeBytecodes                = Command{cmdSetMethod, 3}
+	cmdMethodTypeIsObsolete               = Command{cmdSetMethod, 4}
+	cmdMethodTypeVariableTableWithGeneric = Command{cmdSetMethod, 5}
 
-	CmdObjectReferenceReferenceType     = Command{CmdSetObjectReference, 1}
-	CmdObjectReferenceGetValues         = Command{CmdSetObjectReference, 2}
-	CmdObjectReferenceSetValues         = Command{CmdSetObjectReference, 3}
-	CmdObjectReferenceMonitorInfo       = Command{CmdSetObjectReference, 5}
-	CmdObjectReferenceInvokeMethod      = Command{CmdSetObjectReference, 6}
-	CmdObjectReferenceDisableCollection = Command{CmdSetObjectReference, 7}
-	CmdObjectReferenceEnableCollection  = Command{CmdSetObjectReference, 8}
-	CmdObjectReferenceIsCollected       = Command{CmdSetObjectReference, 9}
+	cmdObjectReferenceReferenceType     = Command{cmdSetObjectReference, 1}
+	cmdObjectReferenceGetValues         = Command{cmdSetObjectReference, 2}
+	cmdObjectReferenceSetValues         = Command{cmdSetObjectReference, 3}
+	cmdObjectReferenceMonitorInfo       = Command{cmdSetObjectReference, 5}
+	cmdObjectReferenceInvokeMethod      = Command{cmdSetObjectReference, 6}
+	cmdObjectReferenceDisableCollection = Command{cmdSetObjectReference, 7}
+	cmdObjectReferenceEnableCollection  = Command{cmdSetObjectReference, 8}
+	cmdObjectReferenceIsCollected       = Command{cmdSetObjectReference, 9}
 
-	CmdStringReferenceValue = Command{CmdSetStringReference, 1}
+	cmdStringReferenceValue = Command{cmdSetStringReference, 1}
 
-	CmdThreadReferenceName                    = Command{CmdSetThreadReference, 1}
-	CmdThreadReferenceSuspend                 = Command{CmdSetThreadReference, 2}
-	CmdThreadReferenceResume                  = Command{CmdSetThreadReference, 3}
-	CmdThreadReferenceStatus                  = Command{CmdSetThreadReference, 4}
-	CmdThreadReferenceThreadGroup             = Command{CmdSetThreadReference, 5}
-	CmdThreadReferenceFrames                  = Command{CmdSetThreadReference, 6}
-	CmdThreadReferenceFrameCount              = Command{CmdSetThreadReference, 7}
-	CmdThreadReferenceOwnedMonitors           = Command{CmdSetThreadReference, 8}
-	CmdThreadReferenceCurrentContendedMonitor = Command{CmdSetThreadReference, 9}
-	CmdThreadReferenceStop                    = Command{CmdSetThreadReference, 10}
-	CmdThreadReferenceInterrupt               = Command{CmdSetThreadReference, 11}
-	CmdThreadReferenceSuspendCount            = Command{CmdSetThreadReference, 12}
+	cmdThreadReferenceName                    = Command{cmdSetThreadReference, 1}
+	cmdThreadReferenceSuspend                 = Command{cmdSetThreadReference, 2}
+	cmdThreadReferenceResume                  = Command{cmdSetThreadReference, 3}
+	cmdThreadReferenceStatus                  = Command{cmdSetThreadReference, 4}
+	cmdThreadReferenceThreadGroup             = Command{cmdSetThreadReference, 5}
+	cmdThreadReferenceFrames                  = Command{cmdSetThreadReference, 6}
+	cmdThreadReferenceFrameCount              = Command{cmdSetThreadReference, 7}
+	cmdThreadReferenceOwnedMonitors           = Command{cmdSetThreadReference, 8}
+	cmdThreadReferenceCurrentContendedMonitor = Command{cmdSetThreadReference, 9}
+	cmdThreadReferenceStop                    = Command{cmdSetThreadReference, 10}
+	cmdThreadReferenceInterrupt               = Command{cmdSetThreadReference, 11}
+	cmdThreadReferenceSuspendCount            = Command{cmdSetThreadReference, 12}
 
-	CmdThreadGroupReferenceName     = Command{CmdSetThreadGroupReference, 1}
-	CmdThreadGroupReferenceParent   = Command{CmdSetThreadGroupReference, 2}
-	CmdThreadGroupReferenceChildren = Command{CmdSetThreadGroupReference, 3}
+	cmdThreadGroupReferenceName     = Command{cmdSetThreadGroupReference, 1}
+	cmdThreadGroupReferenceParent   = Command{cmdSetThreadGroupReference, 2}
+	cmdThreadGroupReferenceChildren = Command{cmdSetThreadGroupReference, 3}
 
-	CmdArrayReferenceLength    = Command{CmdSetArrayReference, 1}
-	CmdArrayReferenceGetValues = Command{CmdSetArrayReference, 2}
-	CmdArrayReferenceSetValues = Command{CmdSetArrayReference, 3}
+	cmdArrayReferenceLength    = Command{cmdSetArrayReference, 1}
+	cmdArrayReferenceGetValues = Command{cmdSetArrayReference, 2}
+	cmdArrayReferenceSetValues = Command{cmdSetArrayReference, 3}
 
-	CmdClassLoaderReferenceVisibleClasses = Command{CmdSetClassLoaderReference, 1}
+	cmdClassLoaderReferenceVisibleClasses = Command{cmdSetClassLoaderReference, 1}
 
-	CmdEventRequestSet                 = Command{CmdSetEventRequest, 1}
-	CmdEventRequestClear               = Command{CmdSetEventRequest, 2}
-	CmdEventRequestClearAllBreakpoints = Command{CmdSetEventRequest, 3}
+	cmdEventRequestSet                 = Command{cmdSetEventRequest, 1}
+	cmdEventRequestClear               = Command{cmdSetEventRequest, 2}
+	cmdEventRequestClearAllBreakpoints = Command{cmdSetEventRequest, 3}
 
-	CmdStackFrameGetValues  = Command{CmdSetStackFrame, 1}
-	CmdStackFrameSetValues  = Command{CmdSetStackFrame, 2}
-	CmdStackFrameThisObject = Command{CmdSetStackFrame, 3}
-	CmdStackFramePopFrames  = Command{CmdSetStackFrame, 4}
+	cmdStackFrameGetValues  = Command{cmdSetStackFrame, 1}
+	cmdStackFrameSetValues  = Command{cmdSetStackFrame, 2}
+	cmdStackFrameThisObject = Command{cmdSetStackFrame, 3}
+	cmdStackFramePopFrames  = Command{cmdSetStackFrame, 4}
 
-	CmdClassObjectReferenceReflectedType = Command{CmdSetClassObjectReference, 1}
+	cmdClassObjectReferenceReflectedType = Command{cmdSetClassObjectReference, 1}
 
-	CmdEventComposite = Command{CmdSetEvent, 1}
+	cmdEventComposite = Command{cmdSetEvent, 1}
 )
 
-var CmdNames = map[Command]string{}
+var cmdNames = map[Command]string{}
 
 func init() {
 	register := func(c Command, n string) {
-		if _, e := CmdNames[c]; e {
+		if _, e := cmdNames[c]; e {
 			panic("command already registered")
 		}
-		CmdNames[c] = n
+		cmdNames[c] = n
 	}
-	register(CmdVirtualMachineVersion, "Version")
-	register(CmdVirtualMachineClassesBySignature, "ClassesBySignature")
-	register(CmdVirtualMachineAllClasses, "AllClasses")
-	register(CmdVirtualMachineAllThreads, "AllThreads")
-	register(CmdVirtualMachineTopLevelThreadGroups, "TopLevelThreadGroups")
-	register(CmdVirtualMachineDispose, "Dispose")
-	register(CmdVirtualMachineIDSizes, "IDSizes")
-	register(CmdVirtualMachineSuspend, "Suspend")
-	register(CmdVirtualMachineResume, "Resume")
-	register(CmdVirtualMachineExit, "Exit")
-	register(CmdVirtualMachineCreateString, "CreateString")
-	register(CmdVirtualMachineCapabilities, "Capabilities")
-	register(CmdVirtualMachineClassPaths, "ClassPaths")
-	register(CmdVirtualMachineDisposeObjects, "DisposeObjects")
-	register(CmdVirtualMachineHoldEvents, "HoldEvents")
-	register(CmdVirtualMachineReleaseEvents, "ReleaseEvents")
-	register(CmdVirtualMachineCapabilitiesNew, "CapabilitiesNew")
-	register(CmdVirtualMachineRedefineClasses, "RedefineClasses")
-	register(CmdVirtualMachineSetDefaultStratum, "SetDefaultStratum")
-	register(CmdVirtualMachineAllClassesWithGeneric, "AllClassesWithGeneric")
+	register(cmdVirtualMachineVersion, "Version")
+	register(cmdVirtualMachineClassesBySignature, "ClassesBySignature")
+	register(cmdVirtualMachineAllClasses, "AllClasses")
+	register(cmdVirtualMachineAllThreads, "AllThreads")
+	register(cmdVirtualMachineTopLevelThreadGroups, "TopLevelThreadGroups")
+	register(cmdVirtualMachineDispose, "Dispose")
+	register(cmdVirtualMachineIDSizes, "IDSizes")
+	register(cmdVirtualMachineSuspend, "Suspend")
+	register(cmdVirtualMachineResume, "Resume")
+	register(cmdVirtualMachineExit, "Exit")
+	register(cmdVirtualMachineCreateString, "CreateString")
+	register(cmdVirtualMachineCapabilities, "Capabilities")
+	register(cmdVirtualMachineClassPaths, "ClassPaths")
+	register(cmdVirtualMachineDisposeObjects, "DisposeObjects")
+	register(cmdVirtualMachineHoldEvents, "HoldEvents")
+	register(cmdVirtualMachineReleaseEvents, "ReleaseEvents")
+	register(cmdVirtualMachineCapabilitiesNew, "CapabilitiesNew")
+	register(cmdVirtualMachineRedefineClasses, "RedefineClasses")
+	register(cmdVirtualMachineSetDefaultStratum, "SetDefaultStratum")
+	register(cmdVirtualMachineAllClassesWithGeneric, "AllClassesWithGeneric")
 
-	register(CmdReferenceTypeSignature, "Signature")
-	register(CmdReferenceTypeClassLoader, "ClassLoader")
-	register(CmdReferenceTypeModifiers, "Modifiers")
-	register(CmdReferenceTypeFields, "Fields")
-	register(CmdReferenceTypeMethods, "Methods")
-	register(CmdReferenceTypeGetValues, "GetValues")
-	register(CmdReferenceTypeSourceFile, "SourceFile")
-	register(CmdReferenceTypeNestedTypes, "NestedTypes")
-	register(CmdReferenceTypeStatus, "Status")
-	register(CmdReferenceTypeInterfaces, "Interfaces")
-	register(CmdReferenceTypeClassObject, "ClassObject")
-	register(CmdReferenceTypeSourceDebugExtension, "SourceDebugExtension")
-	register(CmdReferenceTypeSignatureWithGeneric, "SignatureWithGeneric")
-	register(CmdReferenceTypeFieldsWithGeneric, "FieldsWithGeneric")
-	register(CmdReferenceTypeMethodsWithGeneric, "MethodsWithGeneric")
+	register(cmdReferenceTypeSignature, "Signature")
+	register(cmdReferenceTypeClassLoader, "ClassLoader")
+	register(cmdReferenceTypeModifiers, "Modifiers")
+	register(cmdReferenceTypeFields, "Fields")
+	register(cmdReferenceTypeMethods, "Methods")
+	register(cmdReferenceTypeGetValues, "GetValues")
+	register(cmdReferenceTypeSourceFile, "SourceFile")
+	register(cmdReferenceTypeNestedTypes, "NestedTypes")
+	register(cmdReferenceTypeStatus, "Status")
+	register(cmdReferenceTypeInterfaces, "Interfaces")
+	register(cmdReferenceTypeClassObject, "ClassObject")
+	register(cmdReferenceTypeSourceDebugExtension, "SourceDebugExtension")
+	register(cmdReferenceTypeSignatureWithGeneric, "SignatureWithGeneric")
+	register(cmdReferenceTypeFieldsWithGeneric, "FieldsWithGeneric")
+	register(cmdReferenceTypeMethodsWithGeneric, "MethodsWithGeneric")
 
-	register(CmdClassTypeSuperclass, "Superclass")
-	register(CmdClassTypeSetValues, "SetValues")
-	register(CmdClassTypeInvokeMethod, "InvokeMethod")
-	register(CmdClassTypeNewInstance, "NewInstance")
+	register(cmdClassTypeSuperclass, "Superclass")
+	register(cmdClassTypeSetValues, "SetValues")
+	register(cmdClassTypeInvokeMethod, "InvokeMethod")
+	register(cmdClassTypeNewInstance, "NewInstance")
 
-	register(CmdArrayTypeNewInstance, "NewInstance")
+	register(cmdArrayTypeNewInstance, "NewInstance")
 
-	register(CmdMethodTypeLineTable, "LineTable")
-	register(CmdMethodTypeVariableTable, "VariableTable")
-	register(CmdMethodTypeBytecodes, "Bytecodes")
-	register(CmdMethodTypeIsObsolete, "IsObsolete")
-	register(CmdMethodTypeVariableTableWithGeneric, "VariableTableWithGeneric")
+	register(cmdMethodTypeLineTable, "LineTable")
+	register(cmdMethodTypeVariableTable, "VariableTable")
+	register(cmdMethodTypeBytecodes, "Bytecodes")
+	register(cmdMethodTypeIsObsolete, "IsObsolete")
+	register(cmdMethodTypeVariableTableWithGeneric, "VariableTableWithGeneric")
 
-	register(CmdObjectReferenceReferenceType, "ReferenceType")
-	register(CmdObjectReferenceGetValues, "GetValues")
-	register(CmdObjectReferenceSetValues, "SetValues")
-	register(CmdObjectReferenceMonitorInfo, "MonitorInfo")
-	register(CmdObjectReferenceInvokeMethod, "InvokeMethod")
-	register(CmdObjectReferenceDisableCollection, "DisableCollection")
-	register(CmdObjectReferenceEnableCollection, "EnableCollection")
-	register(CmdObjectReferenceIsCollected, "IsCollected")
+	register(cmdObjectReferenceReferenceType, "ReferenceType")
+	register(cmdObjectReferenceGetValues, "GetValues")
+	register(cmdObjectReferenceSetValues, "SetValues")
+	register(cmdObjectReferenceMonitorInfo, "MonitorInfo")
+	register(cmdObjectReferenceInvokeMethod, "InvokeMethod")
+	register(cmdObjectReferenceDisableCollection, "DisableCollection")
+	register(cmdObjectReferenceEnableCollection, "EnableCollection")
+	register(cmdObjectReferenceIsCollected, "IsCollected")
 
-	register(CmdStringReferenceValue, "Value")
+	register(cmdStringReferenceValue, "Value")
 
-	register(CmdThreadReferenceName, "Name")
-	register(CmdThreadReferenceSuspend, "Suspend")
-	register(CmdThreadReferenceResume, "Resume")
-	register(CmdThreadReferenceStatus, "Status")
-	register(CmdThreadReferenceThreadGroup, "ThreadGroup")
-	register(CmdThreadReferenceFrames, "Frames")
-	register(CmdThreadReferenceFrameCount, "FrameCount")
-	register(CmdThreadReferenceOwnedMonitors, "OwnedMonitors")
-	register(CmdThreadReferenceCurrentContendedMonitor, "CurrentContendedMonitor")
-	register(CmdThreadReferenceStop, "Stop")
-	register(CmdThreadReferenceInterrupt, "Interrupt")
-	register(CmdThreadReferenceSuspendCount, "SuspendCount")
+	register(cmdThreadReferenceName, "Name")
+	register(cmdThreadReferenceSuspend, "Suspend")
+	register(cmdThreadReferenceResume, "Resume")
+	register(cmdThreadReferenceStatus, "Status")
+	register(cmdThreadReferenceThreadGroup, "ThreadGroup")
+	register(cmdThreadReferenceFrames, "Frames")
+	register(cmdThreadReferenceFrameCount, "FrameCount")
+	register(cmdThreadReferenceOwnedMonitors, "OwnedMonitors")
+	register(cmdThreadReferenceCurrentContendedMonitor, "CurrentContendedMonitor")
+	register(cmdThreadReferenceStop, "Stop")
+	register(cmdThreadReferenceInterrupt, "Interrupt")
+	register(cmdThreadReferenceSuspendCount, "SuspendCount")
 
-	register(CmdThreadGroupReferenceName, "Name")
-	register(CmdThreadGroupReferenceParent, "Parent")
-	register(CmdThreadGroupReferenceChildren, "Children")
+	register(cmdThreadGroupReferenceName, "Name")
+	register(cmdThreadGroupReferenceParent, "Parent")
+	register(cmdThreadGroupReferenceChildren, "Children")
 
-	register(CmdArrayReferenceLength, "Length")
-	register(CmdArrayReferenceGetValues, "GetValues")
-	register(CmdArrayReferenceSetValues, "SetValues")
+	register(cmdArrayReferenceLength, "Length")
+	register(cmdArrayReferenceGetValues, "GetValues")
+	register(cmdArrayReferenceSetValues, "SetValues")
 
-	register(CmdClassLoaderReferenceVisibleClasses, "VisibleClasses")
+	register(cmdClassLoaderReferenceVisibleClasses, "VisibleClasses")
 
-	register(CmdEventRequestSet, "Set")
-	register(CmdEventRequestClear, "Clear")
-	register(CmdEventRequestClearAllBreakpoints, "ClearAllBreakpoints")
+	register(cmdEventRequestSet, "Set")
+	register(cmdEventRequestClear, "Clear")
+	register(cmdEventRequestClearAllBreakpoints, "ClearAllBreakpoints")
 
-	register(CmdStackFrameGetValues, "GetValues")
-	register(CmdStackFrameSetValues, "SetValues")
-	register(CmdStackFrameThisObject, "ThisObject")
-	register(CmdStackFramePopFrames, "PopFrames")
+	register(cmdStackFrameGetValues, "GetValues")
+	register(cmdStackFrameSetValues, "SetValues")
+	register(cmdStackFrameThisObject, "ThisObject")
+	register(cmdStackFramePopFrames, "PopFrames")
 
-	register(CmdClassObjectReferenceReflectedType, "ReflectedType")
+	register(cmdClassObjectReferenceReflectedType, "ReflectedType")
 
-	register(CmdEventComposite, "Composite")
+	register(cmdEventComposite, "Composite")
 }

@@ -209,3 +209,8 @@ func Cleanup() {
 		}
 	}
 }
+
+func LogError(logger zerolog.Logger, err error, msg string) error {
+	logger.Error().Err(err).Msg(msg)
+	return fmt.Errorf("%s: %w", msg, err)
+}

@@ -3,9 +3,12 @@ package main
 import (
 	"context"
 	"fmt"
+	"github.com/rs/zerolog/log"
+	"io"
+	"net"
 	"os"
 	"os/signal"
-	"sapelkinav/javadap/awesomejdwp/client"
+	"sapelkinav/javadap/jdwp/client"
 	"sapelkinav/javadap/launcher"
 	"sapelkinav/javadap/utils"
 	"syscall"
@@ -26,22 +29,36 @@ func main() {
 
 	// Launch the Java application with JDWP enabled in server mode
 	fmt.Println("Launching Java application with JDWP enabled...")
-	launcher := launcher.NewJavaLauncher(jarPath, jdwpPort)
-	if err := launcher.Start(); err != nil {
+	javaLauncher := launcher.NewJavaLauncher(jarPath, jdwpPort)
+	if err := javaLauncher.Start(); err != nil {
 		fmt.Fprintf(os.Stderr, "Failed to launch Java process: %v\n", err)
 		os.Exit(1)
 	}
-	defer launcher.Stop()
+	defer javaLauncher.Stop()
 
 	ctx := context.Background()
 	ctx, cancel := context.WithCancel(ctx)
-	jdwpClient := client.NewJdwpClient("localhost:5005", ctx)
+	var socket io.ReadWriteCloser
+	var err error
+	for i := 0; i < 5; i++ {
+		if socket, err = net.Dial("tcp", fmt.Sprintf("localhost:%v", jdwpPort)); err == nil {
+			break
+		}
+		time.Sleep(time.Second)
+	}
 
-	err := jdwpClient.Connect()
-	defer jdwpClient.Close()
+	if socket == nil {
+		log.Warn().Err(err).Msg("Failed to connect to the socket. Error")
+		return
+	}
 
-	fmt.Println(err)
-	jdwpClient.HelloWorld()
+	con, err := client.Open(ctx, socket)
+	defer socket.Close()
+
+	version, err := con.GetVersion()
+	if err != nil {
+		fmt.Println(version)
+	}
 
 	gracefulShutdown(cancel)
 

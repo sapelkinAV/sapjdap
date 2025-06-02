@@ -55,7 +55,7 @@ func InitializeLogger(baseLogDir string, logLevel string) error {
 		return fmt.Errorf("failed to open error logs file: %w", err)
 	}
 
-	// Set global settings for zerolog
+	// set global settings for zerolog
 	zerolog.TimeFieldFormat = time.RFC3339
 
 	// Parse the log level

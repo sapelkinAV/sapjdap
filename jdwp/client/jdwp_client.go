@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"io"
 	"reflect"
+	"sapelkinav/javadap/jdwp/crash"
 	"sapelkinav/javadap/jdwp/data/binary"
 	"sapelkinav/javadap/jdwp/data/endian"
 	"sapelkinav/javadap/utils"
@@ -58,7 +59,7 @@ func Open(ctx context.Context, conn io.ReadWriteCloser) (*Connection, error) {
 		events:  map[EventRequestID]chan<- Event{},
 		replies: map[packetID]chan<- replyPacket{},
 	}
-
+	crash.Go(func() { c.recv(ctx) })
 	var err error
 	c.idSizes, err = c.GetIDSizes()
 	if err != nil {

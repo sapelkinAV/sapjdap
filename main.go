@@ -52,7 +52,7 @@ func main() {
 		return
 	}
 
-	con, err := client.Open(ctx, socket)
+	con, err := jdwpclient.Open(ctx, socket)
 	defer socket.Close()
 
 	version, err := con.GetVersion()

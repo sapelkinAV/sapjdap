@@ -16,8 +16,6 @@ package task
 
 import (
 	"context"
-
-	"sapelkinav/javadap/jdwp/crash"
 )
 
 // Executor is the signature for a function that executes a Task.
@@ -37,7 +35,7 @@ func Direct(ctx context.Context, task Task) Handle {
 // Go is an asynchronous implementation of an Executor that starts a new go routine to run the task.
 func Go(ctx context.Context, task Task) Handle {
 	h, r := Prepare(ctx, task)
-	crash.Go(r)
+	go r()
 	return h
 }
 
@@ -50,11 +48,11 @@ func Go(ctx context.Context, task Task) Handle {
 func Pool(queue int, parallel int) (Executor, Task) {
 	q := make(chan Runner, queue)
 	for i := 0; i < parallel; i++ {
-		crash.Go(func() {
+		go func() {
 			for r := range q {
 				r()
 			}
-		})
+		}()
 	}
 	executor := func(ctx context.Context, task Task) Handle {
 		h, r := Prepare(ctx, task)

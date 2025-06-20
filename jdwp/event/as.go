@@ -17,7 +17,7 @@ package event
 import (
 	"context"
 	"reflect"
-	"sapelkinav/javadap/jdwp/log"
+	""
 )
 
 // AsHandler wraps a destination into an event handler.

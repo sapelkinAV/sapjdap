@@ -18,8 +18,6 @@ import (
 	"context"
 	"sync"
 	"time"
-
-	"sapelkinav/javadap/jdwp/crash"
 )
 
 // Task is the unit of work used in the task system.
@@ -40,10 +38,10 @@ func Once(task Task) Task {
 // Delay wraps a task in a coroutine to asynchronously execute after a specified duration
 func Delay(task Task, duration time.Duration) Task {
 	return func(ctx context.Context) error {
-		crash.Go(func() {
+		go func() {
 			time.Sleep(duration)
 			task(ctx)
-		})
+		}()
 		return nil
 	}
 }
@@ -98,9 +96,9 @@ func Poll(ctx context.Context, i time.Duration, f func(context.Context) error) e
 func Async(ctx context.Context, t Task) (stop func() error) {
 	err := make(chan error, 1)
 	ctx, cancel := WithCancel(ctx)
-	crash.Go(func() {
+	go func() {
 		err <- t(ctx)
-	})
+	}()
 	return func() error {
 		cancel()
 		return <-err

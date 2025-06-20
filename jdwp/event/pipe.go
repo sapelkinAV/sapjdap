@@ -18,8 +18,7 @@ import (
 	"context"
 	"io"
 	"reflect"
-	"sapelkinav/javadap/jdwp/crash"
-	"sapelkinav/javadap/jdwp/log"
+	"sapelkinav/javadap/utils"
 )
 
 // Buffer returns a handler that will feed the supplied handler, but inserts a unbounded buffer
@@ -32,7 +31,7 @@ func Buffer(ctx context.Context, handler Handler) Handler {
 	out := make(chan interface{}) // buffer to passed in handler
 	closer := make(chan struct{}) // close signal
 	events := []interface{}{}
-	crash.Go(func() {
+	go func() {
 		// This is responsible for managing the buffer itself
 		for {
 			output := out
@@ -52,7 +51,7 @@ func Buffer(ctx context.Context, handler Handler) Handler {
 			}
 		}
 	})
-	crash.Go(func() {
+	go func() {
 		// This is responsible for feeding the buffer to the passed in handler
 		for {
 			select {
@@ -67,7 +66,7 @@ func Buffer(ctx context.Context, handler Handler) Handler {
 				return
 			}
 		}
-	})
+	}()
 	// Now return a handler that feeds the buffer input channel
 	return chanHandler(in, closer)
 }

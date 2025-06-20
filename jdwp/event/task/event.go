@@ -16,7 +16,6 @@ package task
 
 import (
 	"context"
-	"sapelkinav/javadap/jdwp/crash"
 	"sync"
 	"time"
 )
@@ -81,12 +80,12 @@ func (e *Events) Join(ctx context.Context) Signal {
 	joined := append([]Event(nil), e.pending...)
 	// build the signal we are going to return
 	done, fire := NewSignal()
-	crash.Go(func() {
+	go func() {
 		defer fire(ctx)
 		for _, signal := range joined {
 			signal.Wait(ctx)
 		}
-	})
+	}()
 	return done
 }
 

@@ -18,7 +18,7 @@ import (
 	"context"
 	"reflect"
 	"sapelkinav/javadap/jdwp/fault"
-	"sapelkinav/javadap/jdwp/log"
+	"sapelkinav/javadap/utils"
 )
 
 var (

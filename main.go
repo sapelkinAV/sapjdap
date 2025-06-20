@@ -8,7 +8,7 @@ import (
 	"net"
 	"os"
 	"os/signal"
-	"sapelkinav/javadap/jdwp/client"
+	"sapelkinav/javadap/jdwp/jdwpclient"
 	"sapelkinav/javadap/launcher"
 	"sapelkinav/javadap/utils"
 	"syscall"

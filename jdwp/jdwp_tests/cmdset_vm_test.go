@@ -31,7 +31,7 @@ import (
 const (
 	TEST_LOG_DIR = "./.test_logs"
 	JDWP_PORT    = 5006
-	JAR_PATH     = "../daphelloworld/build/libs/daphelloworld-0.0.1-SNAPSHOT.jar"
+	JAR_PATH     = "../../daphelloworld/build/libs/daphelloworld-0.0.1-SNAPSHOT.jar"
 )
 
 type TestSetup struct {

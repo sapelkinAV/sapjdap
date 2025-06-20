@@ -65,6 +65,7 @@ type FrameInfo struct {
 
 // GetFrames returns a number of stack frames.
 func (c *Connection) GetFrames(thread ThreadID, start, count int) ([]FrameInfo, error) {
+
 	req := struct {
 		Thread       ThreadID
 		Start, Count int
